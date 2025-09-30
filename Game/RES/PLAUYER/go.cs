@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions.Comparers;
 using UnityEngine.InputSystem;
@@ -16,7 +17,7 @@ public class Go : MonoBehaviour
     public float walkspeed = 5;
     public float rotatespeed = 5;
     public float jumpspeed = 5;
-
+    public Transform pivot;
     private void Awake()
     {
         a_move = InputSystem.actions.FindAction("Move");
@@ -25,6 +26,7 @@ public class Go : MonoBehaviour
 
         animator = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody>();
+        pivot = transform.Find("pivot");
         Cursor.lockState = CursorLockMode.Locked;
     }
     private void Update()
@@ -54,9 +56,9 @@ public class Go : MonoBehaviour
     private void Walking()
     {
     
-    animator.SetFloat("Speed",move.y);
-        rigidbody.MovePosition(rigidbody.position + transform.forward * move.y * walkspeed * Time.deltaTime);
-
+        animator.SetFloat("forward",move.y);
+        rigidbody.MovePosition(rigidbody.position + (transform.forward * move.y + transform.right*move.x) * walkspeed * Time.deltaTime);
+        animator.SetFloat("right",move.x);
     }
     private void Rotating()
     {
@@ -68,7 +70,11 @@ public class Go : MonoBehaviour
 
 
         }
-
+        else
+        {
+            float rotationAmount = look.x * rotatespeed * Time.deltaTime;
+            pivot.Rotate(new Vector3(0, rotationAmount, 0));  
+        }
 
 
 }
