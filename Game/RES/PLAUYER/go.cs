@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions.Comparers;
@@ -13,11 +14,11 @@ public class Go : MonoBehaviour
     private Vector2 move;
     private Vector2 look;
     private Animator animator;
-    private Rigidbody rigidbody;
+    private Rigidbody rb;
     public float walkspeed = 5;
     public float rotatespeed = 5;
     public float jumpspeed = 5;
-    public Transform pivot;
+    public Camera cam;
     private void Awake()
     {
         a_move = InputSystem.actions.FindAction("Move");
@@ -25,9 +26,9 @@ public class Go : MonoBehaviour
         a_jump = InputSystem.actions.FindAction("Jump");
 
         animator = GetComponent<Animator>();
-        rigidbody = GetComponent<Rigidbody>();
-        pivot = transform.Find("pivot");
+        rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
+        cam = Camera.main;
     }
     private void Update()
     {
@@ -44,7 +45,7 @@ public class Go : MonoBehaviour
 
     public void Jump()
     {
-        rigidbody.AddForceAtPosition(new Vector3(0, 5f, 0), Vector3.up, ForceMode.Impulse);
+        rb.AddForceAtPosition(new Vector3(0, 5f, 0), Vector3.up, ForceMode.Impulse);
         //animator.SetTrigger("junp");
 
     }
@@ -57,24 +58,28 @@ public class Go : MonoBehaviour
     {
     
         animator.SetFloat("forward",move.y);
-        rigidbody.MovePosition(rigidbody.position + (transform.forward * move.y + transform.right*move.x) * walkspeed * Time.deltaTime);
+        rb.MovePosition(rb.position + (transform.forward * move.y + transform.right*move.x) * walkspeed * Time.deltaTime);
         animator.SetFloat("right",move.x);
     }
     private void Rotating()
     {
         if (move.y != 0)
         {
-            float rotationAmount = look.x * rotatespeed * Time.deltaTime;
-            Quaternion deltaRotation = Quaternion.Euler(0, rotationAmount, 0);
-            rigidbody.MoveRotation(rigidbody.rotation * deltaRotation);
+            Vector3 targetPos = cam.transform.position + cam.transform.forward * 100;
+            rb.transform.LookAt(new Vector3(targetPos.x, targetPos.y, targetPos.z));
+            Debug.Log(transform.localRotation.eulerAngles);
+            rb.transform.localRotation = Quaternion.Euler(0, rb.transform.localRotation.eulerAngles.y, 0);
+            //float rotationAmount = look.x * rotatespeed * Time.deltaTime;
+            //Quaternion deltaRotation = Quaternion.Euler(0, rotationAmount, 0);
+            // rb.MoveRotation(rb.rotation * deltaRotation);
 
 
         }
-        else
-        {
-            float rotationAmount = look.x * rotatespeed * Time.deltaTime;
-            pivot.Rotate(new Vector3(0, rotationAmount, 0));  
-        }
+       // else
+        //{
+          // float rotationAmount = look.x * rotatespeed * Time.deltaTime;
+           // pivot.Rotate(new Vector3(0, rotationAmount, 0));
+      //  }
 
 
 }

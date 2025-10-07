@@ -943,11 +943,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1889992866 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 640933568103790454, guid: 2a3db6abb26806b42bce1dc0a92ed9c0, type: 3}
-  m_PrefabInstance: {fileID: 4038798565580894414}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2115608742 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 265392435864235468, guid: 2a3db6abb26806b42bce1dc0a92ed9c0, type: 3}
@@ -958,27 +953,6 @@ Rigidbody:
   m_CorrespondingSourceObject: {fileID: 3655590162881880448, guid: 2a3db6abb26806b42bce1dc0a92ed9c0, type: 3}
   m_PrefabInstance: {fileID: 4038798565580894414}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2115608747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1889992866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3be741bb255eb6d4b9f1eec5466ccca6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerCamera
-  orientation: {fileID: 0}
-  player: {fileID: 2115608742}
-  playerObj: {fileID: 0}
-  rb: {fileID: 0}
-  rotationSpeed: 0
-  combatLookAt: {fileID: 0}
-  thirdPersonCam: {fileID: 0}
-  combatCam: {fileID: 0}
-  currentStyle: 0
 --- !u!1001 &4038798565580894414
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1031,18 +1005,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: creeper man
       objectReference: {fileID: 0}
-    - target: {fileID: 2426953767726156280, guid: 2a3db6abb26806b42bce1dc0a92ed9c0, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 2797807669327645827, guid: 2a3db6abb26806b42bce1dc0a92ed9c0, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 640933568103790454, guid: 2a3db6abb26806b42bce1dc0a92ed9c0, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 2115608747}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a3db6abb26806b42bce1dc0a92ed9c0, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
